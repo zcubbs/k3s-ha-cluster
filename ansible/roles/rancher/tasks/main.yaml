@@ -1,0 +1,41 @@
+---
+
+- name: Add Rancher stable helm chart repo
+  community.kubernetes.helm_repository:
+    name: rancher-stable
+    repo_url: "https://releases.rancher.com/server-charts/stable"
+
+- name: Deploy Rancher chart
+  community.kubernetes.helm:
+    name: rancher
+    chart_ref: rancher-stable/rancher
+    release_namespace: cattle-system
+    create_namespace: yes
+    update_repo_cache: "{{ update_helm_repo }}"
+    wait: yes
+    values_files:
+      - "{{working_directory_path}}/rancher/values.yaml"
+
+- name: Create Ingress
+  community.kubernetes.k8s:
+    state: present
+    src: "{{working_directory_path}}/rancher/ingress-legacy.yaml"
+  when: not cert_manager
+
+- name: Create Ingress
+  community.kubernetes.k8s:
+    state: present
+    src: "{{working_directory_path}}/rancher/ingress.yaml"
+  when: cert_manager
+
+- name: Create Staging Certs
+  community.kubernetes.k8s:
+    state: present
+    src: "{{working_directory_path}}/rancher/staging-certs.yaml"
+  when: cert_manager and cert_issuer == "staging"
+
+- name: Create Prod Certs
+  community.kubernetes.k8s:
+    state: present
+    src: "{{working_directory_path}}/rancher/prod-certs.yaml"
+  when: cert_manager and cert_issuer == "prod"

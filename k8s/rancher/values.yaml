@@ -1,0 +1,6 @@
+hostname: <DOMAIN_NAME>
+ingress:
+  enabled: false
+  extraAnnotations:
+    kubernetes.io/ingress.class: "traefik"
+tls: "external"

@@ -1,0 +1,13 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: cert-rancher
+  namespace: cattle-system
+spec:
+  commonName: <DOMAIN_NAME>
+  secretName: cert-rancher
+  dnsNames:
+    - <DOMAIN_NAME>
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer

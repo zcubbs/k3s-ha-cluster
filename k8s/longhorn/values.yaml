@@ -1,0 +1,6 @@
+---
+defaultSettings:
+  defaultReplicaCount: 3
+persistence:
+  defaultClass: true
+  defaultClassReplicaCount: 3

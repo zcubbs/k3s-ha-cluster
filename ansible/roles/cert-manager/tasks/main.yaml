@@ -1,0 +1,26 @@
+---
+
+- name: Install Cert-Manager
+  command: kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v1.2.0/cert-manager.yaml
+
+- name: Create Staging Issuer
+  community.kubernetes.k8s:
+    state: present
+    src: "{{working_directory_path}}/cert-manager/staging-issuer.yaml"
+
+- name: Create Prod Issuer
+  community.kubernetes.k8s:
+    state: present
+    src: "{{working_directory_path}}/cert-manager/prod-issuer.yaml"
+
+- name: Create Staging Certs
+  community.kubernetes.k8s:
+    state: present
+    src: "{{working_directory_path}}/cert-manager/staging-certs.yaml"
+  when: cert_issuer == "staging"
+
+- name: Create Prod Certs
+  community.kubernetes.k8s:
+    state: present
+    src: "{{working_directory_path}}/cert-manager/prod-certs.yaml"
+  when: cert_issuer == "prod"

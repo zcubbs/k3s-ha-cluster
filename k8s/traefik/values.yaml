@@ -1,0 +1,30 @@
+service:
+  enabled: true
+  type: LoadBalancer
+rbac:
+  enabled: true
+additionalArguments:
+  # Disable internal ssl check
+  - "--serversTransport.insecureSkipVerify=true"
+  - "--ping"
+  # TLS Challenge with Cert-Manager
+  - "--entrypoints.websecure.http.tls=true"
+  - "--providers.kubernetesIngress.ingressClass=traefik-cert-manager"
+
+persistence:
+  enabled: true
+  path: /data
+  storageClass: "longhorn"
+
+ingressRoute:
+  dashboard:
+    enabled: true
+
+logs:
+  general:
+    level: INFO
+  access:
+    enabled: true
+
+pilot:
+  enabled: false

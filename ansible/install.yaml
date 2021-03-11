@@ -1,0 +1,24 @@
+---
+
+- name: Deploy all apps
+  hosts: localhost
+  gather_facts: false
+  connection: local
+  become: True
+  vars:
+    update_helm_repo: yes
+    cert_issuer: "prod"
+    cert_manager: true
+    working_directory_path: "../../../k8s"
+    apps:
+      - longhorn
+      - traefik
+      - cert-manager
+      - rancher
+
+  roles:
+    - { role: longhorn, become: no, when: '"longhorn" in apps' }
+    - { role: traefik, become: no, when: '"traefik" in apps' }
+    - { role: cert-manager, become: no, when: '"cert-manager" in apps' }
+    - { role: rancher, become: no, when: '"rancher" in apps' }
+

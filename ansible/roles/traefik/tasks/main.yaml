@@ -1,0 +1,18 @@
+---
+
+- name: Add Traefik stable helm chart repo
+  community.kubernetes.helm_repository:
+    name: traefik
+    repo_url: "https://helm.traefik.io/traefik"
+
+- name: Deploy Traefik chart
+  community.kubernetes.helm:
+    name: traefik
+    chart_ref: traefik/traefik
+    release_namespace: traefik
+    create_namespace: yes
+    update_repo_cache: "{{ update_helm_repo }}"
+    wait: yes
+    values_files:
+      - "{{working_directory_path}}/traefik/values.yaml"
+

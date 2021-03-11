@@ -1,0 +1,6 @@
+---
+
+update_helm_repo: yes
+cert_issuer: "staging"
+cert_manager: true
+working_directory_path: "../../../k8s"
