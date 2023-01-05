@@ -1,7 +1,6 @@
 # ha-k3s-cluster
-[CNCN Community](https://community.cncn.io/)
 
-As asked by [@adriandotgoins](https://twitter.com/adriandotgoins), I thought I'd share how I set up my Kubernetes personal playground (a WIP), and share my personal experience with the [OVH Incident](https://www.reuters.com/article/us-france-ovh-fire-idUSKBN2B20NU). Hopefully this might be useful for someone, and it gives me a chance to contribute back to the CNCN community.
+I thought I'd share how I set up my Kubernetes personal playground (a WIP), and share my personal experience with the [OVH Incident](https://www.reuters.com/article/us-france-ovh-fire-idUSKBN2B20NU). Hopefully this might be useful for someone, and it gives me a chance to contribute back to the CNCN community.
 
 ---
 
